@@ -23,7 +23,7 @@
   function createElement(element) { return document.createElement(element); }
   function addEventListener(element, eventName, callback, useCapture) { element.addEventListener(eventName, callback, useCapture); }
   function reqAnimationFrame(callback) { return window.requestAnimationFrame(callback) };
-  function optionIndex(select) { return select.getAttribute(DATA_INDEX); }
+  function optionIndex(option) { return option.getAttribute(DATA_INDEX); }
 
   function scaffold(selectElement) {
     // Create a wrapper element
