@@ -1,0 +1,56 @@
+.select {
+  display: inline-block;
+  position: relative;
+}
+
+.select select > * {
+  /* Hide the <option> tags */
+  display: none;
+}
+
+.select__overlay {
+  /* Cover the entire viewport */
+  position: fixed; top: 0; right: 0; bottom: 0; left: 0;
+
+  /* Hide the overlay */
+  display: none;
+}
+
+.select__options {
+  /* Remove <ol> styles */
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  /* Position the option list below the <select> */
+  position: absolute; left: 0; top: 100%;
+  width: 100%;
+
+  /* Hide the option list */
+  display: none;
+}
+
+.select__options--top {
+  /* Position the option list above the <select> */
+  top: auto;
+  bottom: 100%;
+}
+
+.select__option {
+  cursor: default;
+}
+
+/* When focused, show the overlay and option list, and set z-index layers */
+.select--focused .select__overlay {
+  display: block;
+  z-index: 1;
+}
+
+.select--focused > select {
+  position: relative; z-index: 2;
+}
+
+.select--focused .select__options {
+  display: block;
+  z-index: 2;
+}

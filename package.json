@@ -1,0 +1,22 @@
+{
+  "name": "select.js",
+  "version": "0.0.1",
+  "description": "A customizable dropdown plugin",
+  "main": "./src/custom-select.js",
+  "scripts": {
+    "start": "./node_modules/.bin/browser-sync start --no-open --server \"./\" --files \"./src/**/*\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chaucerbao/select.js.git"
+  },
+  "author": "Alvin Chan <no@email.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chaucerbao/select.js/issues"
+  },
+  "homepage": "https://github.com/chaucerbao/select.js#readme",
+  "devDependencies": {
+    "browser-sync": "*"
+  }
+}

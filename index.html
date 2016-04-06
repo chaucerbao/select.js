@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Customizable Dropdown Example</title>
+    <link href="src/select.css" rel="stylesheet" type="text/css" />
+    <style type="text/css" media="screen">
+      /* Sample theme, used for testing */
+      .select > select {
+        background: lightgrey;
+
+        /* Must define width/height to display properly in some browsers */
+        width: 100px; height: 24px;
+      }
+      .select__overlay {
+        background: rgba(0, 0, 0, .7);
+      }
+      .select__option:hover {
+        background: lightskyblue;
+      }
+      .select__options {
+        background: lightgrey;
+      }
+      .select__option--selected {
+        background: steelblue;
+        color: white;
+      }
+
+      /* Basic styling for this page, you can safely ignore */
+      #example {
+        padding-top: 250px;
+      }
+      #future {
+        margin-top: 16px;
+      }
+      #message {
+        color: red;
+        position: fixed; top: 0; left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>A customizable dropdown plugin</h1>
+
+    <p>How many times have you worked on a project where the designer customizes a dropdown, not knowing that the CSS available to style an &lt;option&gt; element is extremely limited? You then find yourself searching around for plugins that end up being large in size and require you to study the API for various options.</p>
+    <p>This plugin is tiny and it stays out of your way; just write your HTML and style your &lt;select&gt; as you normally would. The plugin will attach itself to the &lt;select&gt; element when the user first interacts with it. That also means that all &lt;select&gt; elements added in the future will automatically be supported without having to run any extra code. Just load this plugin and forget about it.</p>
+
+    <div id="example">
+      This is sample text that is placed above the select boxes.<br />This goes behind.
+
+      <select>
+        <option value="">Numbers</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="0">0</option>
+      </select>
+
+      Then in the middle.
+
+      <select>
+        <option value="">Alphabet</option>
+        <option value="1">A</option>
+        <option value="2">B</option>
+        <option value="3">C</option>
+        <option value="4">D</option>
+        <option value="5">E</option>
+        <option value="6">F</option>
+        <option value="7">G</option>
+        <option value="8">H</option>
+        <option value="9">I</option>
+        <option value="10">J</option>
+        <option value="11">K</option>
+        <option value="12">L</option>
+        <option value="13">M</option>
+        <option value="14">N</option>
+        <option value="15">O</option>
+        <option value="16">P</option>
+        <option value="17">Q</option>
+        <option value="18">R</option>
+        <option value="19">S</option>
+        <option value="20">T</option>
+        <option value="21">U</option>
+        <option value="22">V</option>
+        <option value="23">W</option>
+        <option value="24">X</option>
+        <option value="25">Y</option>
+        <option value="26">Z</option>
+      </select>
+
+      And then after the select boxes.<br />Finally, this is sample text that is below the select boxes.
+
+      <div id="future"></div>
+      <div id="message"></div>
+    </div>
+
+    <script src="src/select.js"></script>
+    <script>
+      /* Example Javascript interactions */
+      var message = document.getElementById("message");
+      var selects = document.querySelectorAll("select");
+      var handler;
+
+      /* Load a <select> after a small wait */
+      setTimeout(function() {
+        var future = document.getElementById("future");
+        future.innerHTML = "And here's one from the future! ";
+
+        var generatedSelect = document.createElement("select");
+        generatedSelect.innerHTML = "<option value='one'>One</option><option value='two'>Two</option><option value='three'>Three</option>";
+        generatedSelect.addEventListener("change", function() { changeDetected(3); });
+
+        future.appendChild(generatedSelect);
+      }, 2000);
+
+      /* Bind "onchange" event listeners like you normally would */
+      selects[0].addEventListener("change", function() { changeDetected(1); });
+      selects[1].addEventListener("change", function() { changeDetected(2); });
+
+      function changeDetected(id) {
+        if (handler) { clearTimeout(handler); }
+
+        message.innerHTML = "Change event detected on select " + id + ".";
+
+        handler = setTimeout(function() {
+          message.innerHTML = "";
+          handler = null;
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>
