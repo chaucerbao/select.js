@@ -11,8 +11,18 @@
   var KEYDOWN = "keydown";
   var DATA_INDEX = "data-index";
 
-  var shouldDetachOptions = false;
+  var userAgent = navigator.userAgent.toLowerCase();
   var activeSelect;
+
+  // Disable entirely for devices that use a system level option selector in place of a drop-down
+  var shouldDisable = (
+    (/ipad|iphone|ipod/i.test(userAgent) && !window.MSStream)
+  );
+
+  // Detach <option> tags for browsers that attempt to display their native list
+  var shouldDetachOptions = (
+    userAgent.indexOf("safari") > -1 && userAgent.indexOf("chrome") === -1
+  );
 
   // Shortcuts
   function $(selector, context) { return (context || document).querySelector(selector); }
@@ -264,7 +274,9 @@
     }
   }
 
-  // Initialize the custom select box on first click/keyup
-  addEventListener(document, MOUSEDOWN, initialize.bind(this, true));
-  addEventListener(document, KEYUP, initialize.bind(this, false));
+  if (!shouldDisable) {
+    // Initialize the custom select box on first click/keyup
+    addEventListener(document, MOUSEDOWN, initialize.bind(this, true));
+    addEventListener(document, KEYUP, initialize.bind(this, false));
+  }
 }(window, document));
